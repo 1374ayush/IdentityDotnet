@@ -6,10 +6,12 @@ namespace IdentityProject.Logic
     public class AccountLogic : IAccountLogic
     {
         private readonly UserManager<IdentityUser> _userManager;
+        private readonly SignInManager<IdentityUser> _signInManager;
 
-        public AccountLogic(UserManager<IdentityUser> userManager)
+        public AccountLogic(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager)
         {
             _userManager = userManager;
+            _signInManager = signInManager;
         }
 
 
@@ -27,6 +29,15 @@ namespace IdentityProject.Logic
             var result = await _userManager.CreateAsync(newUser, user.Password);
 
             return result;
+        }
+
+        // signin process here....
+
+        public async Task<SignInResult> PasswordSignInAsync(SignInModel user)
+        {
+            var response = await _signInManager.PasswordSignInAsync(user.Email, user.Password, user.RememberMe, false);
+
+            return response;
         }
 
     }

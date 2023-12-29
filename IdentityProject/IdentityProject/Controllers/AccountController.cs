@@ -30,5 +30,21 @@ namespace IdentityProject.Controllers
             }
             
         }
+
+        [HttpPost("Signin")]
+        public async Task<IActionResult> SignIn(SignInModel user)
+        {
+            var response =  await _accountLogic.PasswordSignInAsync(user);
+
+            if (response.Succeeded)
+            {
+                return Ok(true);
+            }
+            else
+            {
+                return BadRequest("error");
+            }
+        }
+
     }
 }
