@@ -17,9 +17,9 @@ namespace IdentityProject.Controllers
         }
 
         [HttpPost("Signup")]
-        public async Task<IActionResult> SignUp(User user)
+        public async Task<IActionResult> SignUp(User user, string role)
         {
-            var response =await _accountLogic.CreateUserAsync(user);
+            var response =await _accountLogic.CreateUserAsync(user, role);
 
             if (response.Succeeded)
             {

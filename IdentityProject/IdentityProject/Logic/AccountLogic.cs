@@ -22,7 +22,7 @@ namespace IdentityProject.Logic
 
 
         // signup process here...
-        public async Task<IdentityResult> CreateUserAsync(User user) {
+        public async Task<IdentityResult> CreateUserAsync(User user, string role) {
 
             //here we have created newUser which is of IdentityUser type becoz , our user manager is accepting IdentityUser type oject
             var newUser = new IdentityUser()
@@ -33,6 +33,16 @@ namespace IdentityProject.Logic
 
             // createAsync function accepts 2 parameter one is user detail and other is password.
             var result = await _userManager.CreateAsync(newUser, user.Password);
+
+            if (result.Succeeded)
+            {
+                var roleResult = await _userManager.AddToRoleAsync(newUser, role);
+                if (!roleResult.Succeeded)
+                {
+                    await _userManager.DeleteAsync(newUser);
+                    return roleResult;
+                }
+            }
 
             return result;
         }
@@ -46,14 +56,20 @@ namespace IdentityProject.Logic
             if (result.Succeeded)
             {
                 //generate token
-                string token = GenerateToken(user);
-
-                return new UserManagerResponseViewModel
+                var loginUser = await _userManager.FindByEmailAsync(user.Email);
+                if (loginUser != null)
                 {
-                    Message = token,
-                    IsSuccess = true,
+                    string tempRole = "";
+                    var roles = await _userManager.GetRolesAsync(loginUser);
+                    if(roles.Count() > 0) { tempRole = roles[0]; }
+                    string token = GenerateToken(user, tempRole);
 
-                };
+                    return new UserManagerResponseViewModel
+                    {
+                        Message = token,
+                        IsSuccess = true,
+                    };
+                }
 
             }
             return new UserManagerResponseViewModel
@@ -64,12 +80,13 @@ namespace IdentityProject.Logic
             };
         }
 
-        private string GenerateToken(SignInModel userObj)
+        private string GenerateToken(SignInModel userObj, string role)
         {
             //create claims
             var claims = new[]
             {
                 new Claim("Email",userObj.Email),
+                new Claim(ClaimTypes.Role,role)
             };
 
             //get the key

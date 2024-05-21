@@ -14,5 +14,12 @@ namespace IdentityProject.Controllers
         {
             return Ok("I will only run when u r loged in");
         }
+
+        [Authorize(Roles ="admin")]
+        [HttpGet("admin")]
+        public IActionResult CheckAuthorizeAdmin()
+        {
+            return Ok("I will only run when u r loged in through admin");
+        }
     }
 }

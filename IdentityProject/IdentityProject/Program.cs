@@ -42,6 +42,10 @@ builder.Services.AddAuthentication(options =>
         };
     });
 
+// Add Authorization service
+builder.Services.AddAuthorization();
+
+
 var app = builder.Build();
 
 
