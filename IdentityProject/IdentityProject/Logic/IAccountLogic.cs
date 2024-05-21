@@ -6,6 +6,6 @@ namespace IdentityProject.Logic
     public interface IAccountLogic
     {
         Task<IdentityResult> CreateUserAsync(User user);
-        Task<SignInResult> PasswordSignInAsync(SignInModel user);
+        Task<UserManagerResponseViewModel> PasswordSignInAsync(SignInModel user);
     }
 }

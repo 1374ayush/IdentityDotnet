@@ -65,3 +65,4 @@ C:\Users\ayushsrivastava03\OneDrive - Nagarro\Desktop\IdentityDotnet\IdentityPro
 C:\Users\ayushsrivastava03\OneDrive - Nagarro\Desktop\IdentityDotnet\IdentityProject\IdentityProject\obj\Debug\net6.0\IdentityProject.pdb
 C:\Users\ayushsrivastava03\OneDrive - Nagarro\Desktop\IdentityDotnet\IdentityProject\IdentityProject\obj\Debug\net6.0\IdentityProject.genruntimeconfig.cache
 C:\Users\ayushsrivastava03\OneDrive - Nagarro\Desktop\IdentityDotnet\IdentityProject\IdentityProject\obj\Debug\net6.0\ref\IdentityProject.dll
+C:\Users\ayushsrivastava03\OneDrive - Nagarro\Desktop\IdentityDotnet\IdentityProject\IdentityProject\obj\Debug\net6.0\IdentityProject.sourcelink.json

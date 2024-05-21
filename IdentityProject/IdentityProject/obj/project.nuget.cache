@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "c7vashdBPKy72M1O5Epyf3jJuOeSFJnsFGfel0NYgjSCvdTtvVOt7EITc1rd6LlWD0Nrpaehsc8PiMyqfcxZog==",
+  "dgSpecHash": "y1DJhjkdqv5tMeH6UoOjl2bZkoCz6vYOY+OVo2GUyyELFdwem7F3NlmULkxM2mhjlREerOMICu4sy94kCbWlhA==",
   "success": true,
   "projectFilePath": "C:\\Users\\ayushsrivastava03\\OneDrive - Nagarro\\Desktop\\IdentityDotnet\\IdentityProject\\IdentityProject\\IdentityProject.csproj",
   "expectedPackageFiles": [
@@ -58,7 +58,11 @@
     "C:\\Users\\ayushsrivastava03\\.nuget\\packages\\system.security.permissions\\4.7.0\\system.security.permissions.4.7.0.nupkg.sha512",
     "C:\\Users\\ayushsrivastava03\\.nuget\\packages\\system.security.principal.windows\\4.7.0\\system.security.principal.windows.4.7.0.nupkg.sha512",
     "C:\\Users\\ayushsrivastava03\\.nuget\\packages\\system.text.encoding.codepages\\4.7.0\\system.text.encoding.codepages.4.7.0.nupkg.sha512",
-    "C:\\Users\\ayushsrivastava03\\.nuget\\packages\\system.windows.extensions\\4.7.0\\system.windows.extensions.4.7.0.nupkg.sha512"
+    "C:\\Users\\ayushsrivastava03\\.nuget\\packages\\system.windows.extensions\\4.7.0\\system.windows.extensions.4.7.0.nupkg.sha512",
+    "C:\\Users\\ayushsrivastava03\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\6.0.30\\microsoft.windowsdesktop.app.ref.6.0.30.nupkg.sha512",
+    "C:\\Users\\ayushsrivastava03\\.nuget\\packages\\microsoft.netcore.app.ref\\6.0.30\\microsoft.netcore.app.ref.6.0.30.nupkg.sha512",
+    "C:\\Users\\ayushsrivastava03\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\6.0.30\\microsoft.aspnetcore.app.ref.6.0.30.nupkg.sha512",
+    "C:\\Users\\ayushsrivastava03\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\6.0.30\\microsoft.netcore.app.host.win-x64.6.0.30.nupkg.sha512"
   ],
   "logs": []
 }

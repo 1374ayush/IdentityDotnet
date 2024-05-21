@@ -23,10 +23,10 @@ namespace IdentityProject.Controllers
 
             if (response.Succeeded)
             {
-                return Ok(true);
+                return Ok(response);
             }else
             { 
-                return BadRequest(response.Errors);
+                return BadRequest(response);
             }
             
         }
@@ -36,13 +36,13 @@ namespace IdentityProject.Controllers
         {
             var response =  await _accountLogic.PasswordSignInAsync(user);
 
-            if (response.Succeeded)
+            if (response.IsSuccess)
             {
-                return Ok(true);
+                return Ok(response);
             }
             else
             {
-                return BadRequest("error");
+                return BadRequest(response);
             }
         }
 

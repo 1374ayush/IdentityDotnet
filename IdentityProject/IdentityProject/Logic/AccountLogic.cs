@@ -1,5 +1,9 @@
 ﻿using IdentityProject.Models;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
 
 namespace IdentityProject.Logic
 {
@@ -7,11 +11,13 @@ namespace IdentityProject.Logic
     {
         private readonly UserManager<IdentityUser> _userManager;
         private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly IConfiguration _configuration;
 
-        public AccountLogic(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager)
+        public AccountLogic(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager, IConfiguration configuration)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _configuration= configuration;
         }
 
 
@@ -33,11 +39,52 @@ namespace IdentityProject.Logic
 
         // signin process here....
 
-        public async Task<SignInResult> PasswordSignInAsync(SignInModel user)
+        public async Task<UserManagerResponseViewModel> PasswordSignInAsync(SignInModel user)
         {
-            var response = await _signInManager.PasswordSignInAsync(user.Email, user.Password, user.RememberMe, false);
+            var result = await _signInManager.PasswordSignInAsync(user.Email, user.Password, user.RememberMe, false);
 
-            return response;
+            if (result.Succeeded)
+            {
+                //generate token
+                string token = GenerateToken(user);
+
+                return new UserManagerResponseViewModel
+                {
+                    Message = token,
+                    IsSuccess = true,
+
+                };
+
+            }
+            return new UserManagerResponseViewModel
+            {
+                Message = "Invalid credential",
+                IsSuccess = false,
+
+            };
+        }
+
+        private string GenerateToken(SignInModel userObj)
+        {
+            //create claims
+            var claims = new[]
+            {
+                new Claim("Email",userObj.Email),
+            };
+
+            //get the key
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JWT:Key"]));
+
+            var token = new JwtSecurityToken(
+                issuer: _configuration["JWT:Issuer"],
+                audience: _configuration["JWT:Audience"],
+                claims: claims,
+                expires: DateTime.Now.AddDays(1),
+                signingCredentials: new SigningCredentials(key, SecurityAlgorithms.HmacSha256)
+                );
+
+            string tokenAsString = new JwtSecurityTokenHandler().WriteToken(token);
+            return tokenAsString;
         }
 
     }
